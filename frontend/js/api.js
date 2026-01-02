@@ -1,13 +1,13 @@
 import { BASE_URL, USE_MOCK } from "./config.js";
 
-// МОК для теста без backend (потом выключишь USE_MOCK)
+// МОК для теста без backend (потом надо выключить USE_MOCK)
 function mockLogin(email, password) {
   if (!email || !password) {
     const err = new Error("EMPTY_FIELDS");
     err.status = 400;
     throw err;
   }
-  // фейковый токен
+  // фейк токен
   return { token: "MOCK_JWT_TOKEN", role: "ADMIN" };
 }
 

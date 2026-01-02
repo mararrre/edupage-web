@@ -106,10 +106,7 @@
 
     try {
       const { role } = await login(emailEl.value.trim(), passEl.value);
-      // пока backend не важен — просто редирект
       window.location.href = "index.html";
-      // позже можно по роли:
-      // if (role === "ADMIN") window.location.href = "admin.html";
     } catch (err) {
       if (err.status === 401 || err.status === 403) showError("Неверный email или пароль");
       else if (err.message === "EMPTY_FIELDS") showError("Заполни email и пароль");
