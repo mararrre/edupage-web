@@ -86,10 +86,39 @@
         }
     </style>
 </head>
+
+<script type="module">
+  import { login } from "./js/auth.js";
+
+  const form = document.getElementById("loginForm");
+  const emailEl = document.getElementById("email");
+  const passEl = document.getElementById("password");
+  const errorBox = document.getElementById("errorBox");
+
+  const showError = (msg) => {
+    errorBox.textContent = msg;
+    errorBox.style.display = "block";
+  };
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorBox.style.display = "none";
+
+    try {
+      const { role } = await login(emailEl.value.trim(), passEl.value);
+      window.location.href = "index.html";
+    } catch (err) {
+      if (err.status === 401 || err.status === 403) showError("Неверный email или пароль");
+      else if (err.message === "EMPTY_FIELDS") showError("Заполни email и пароль");
+      else showError("Ошибка входа / сервер недоступен");
+    }
+  });
+</script>
+
 <body>
     <div class="container">
         <h1>Login</h1>
-        <form>
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
@@ -98,6 +127,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div id="errorBox" style="display:none; color:#c00; margin-bottom:12px; font-size:14px;"></div>
             <button type="submit">Login</button>
         </form>
        
