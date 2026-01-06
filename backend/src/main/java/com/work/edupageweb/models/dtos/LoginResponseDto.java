@@ -1,4 +1,4 @@
-package com.work.edupagetest.model.dto;
+package com.work.edupageweb.models.dtos;
 
 public class LoginResponseDto {
 

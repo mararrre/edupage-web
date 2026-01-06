@@ -1,4 +1,4 @@
-package com.work.edupagetest.controller;
+package com.work.edupageweb.controllers;
 
 import com.work.edupagetest.model.dto.LoginRequestDto;
 import com.work.edupagetest.model.dto.LoginResponseDto;
