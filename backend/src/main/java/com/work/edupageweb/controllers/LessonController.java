@@ -6,6 +6,9 @@ import com.work.edupageweb.services.LessonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DayOfWeek;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class LessonController {
@@ -22,25 +25,24 @@ public class LessonController {
     }
 
     @GetMapping("/lessons/day")
-    public ResponseEntity<?> getLessonDay(@RequestParam Integer day) {
-        return null;
+    public ResponseEntity<List<Lesson>> getLessonDay(@RequestParam DayOfWeek dayOfWeek) {
+        return ResponseEntity.ok(lessonService.getLessonsForDay(dayOfWeek));
     }
 
     @GetMapping("/lessons/week")
-    public ResponseEntity<?> getLessonWeek(@RequestParam Integer week) {
-        return null;
-
+    public ResponseEntity<List<Lesson>> getLessonWeek() {
+        return ResponseEntity.ok(lessonService.getLessonsForWeek());
     }
 
     @PutMapping("/lessons/{id}")
-    public ResponseEntity<?> updateLesson(@PathVariable Integer id, @RequestBody LessonDto lessonDto) {
-        return null;
+    public ResponseEntity<Lesson> updateLesson(@PathVariable Long id, @RequestBody Lesson lessonDto) {
+        return ResponseEntity.ok(lessonService.update(id, lessonDto));
 
     }
 
     @DeleteMapping("/lessons/{id}")
-    public ResponseEntity<?> deleteLesson(@PathVariable Integer id) {
-        return null;
+    public String deleteLesson(@PathVariable Long id) {
+        return lessonService.delete(id);
 
     }
 }
