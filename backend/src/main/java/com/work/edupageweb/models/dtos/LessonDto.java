@@ -1,13 +1,17 @@
 package com.work.edupageweb.models.dtos;
 
-import com.work.edupageweb.enums.DayOfWeek;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
-import java.time.LocalTime;
+@Data
+@Schema(description = "Объект для передачи данных занятия (DTO)")
+public class LessonDto {
+    @Schema(example = "1", description = "ID предмета")
+    private Long subjectId;
 
-public record LessonDto (
-    Long subject,
-    DayOfWeek dayOfWeek,
-    LocalTime time
+    @Schema(example = "MONDAY", description = "День недели")
+    private String dayOfWeek;
 
-){
+    @Schema(example = "09:00", description = "Время начала занятия")
+    private String time;
 }
